@@ -1,0 +1,8 @@
+
+html {
+    scroll-behavior: smooth;
+}
+
+#weather-forecast {
+    scroll-margin-top: 80px;
+}
