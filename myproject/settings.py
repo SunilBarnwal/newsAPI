@@ -30,7 +30,9 @@ DEBUG = True
 load_dotenv()
 News_API_KEY = os.getenv("NEWS_API_KEY")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["newsapi-n996.onrender.com","*"]
+
+CSRF_TRUSTED_ORIGINS = ["https://newsapi-n996.onrender.com"]
 
 
 # Application definition
