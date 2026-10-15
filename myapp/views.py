@@ -3,6 +3,8 @@ import requests
 from django.shortcuts import render
 from datetime import datetime, timedelta
 
+from myproject.settings import News_API_KEY
+
 
 def index_view(request):
     from_date = (
@@ -13,7 +15,7 @@ def index_view(request):
         "https://newsapi.org/v2/everything"
         f"?q=india&from={from_date}"
         "&sortBy=publishedAt"
-        "&apiKey=b7986513026f494b852cd13033964154"
+        f"&apiKey={News_API_KEY}"
     )
 
     
@@ -47,7 +49,7 @@ def search_menu(request):
         from_date=(datetime.now() - timedelta(days=1))
         
         
-        request_url=f"https://newsapi.org/v2/everything?q={query}&from={from_date.strftime('%Y-%m-%d')}&sortBy=publishedAt&apiKey=b7986513026f494b852cd13033964154"
+        request_url=f"https://newsapi.org/v2/everything?q={query}&from={from_date.strftime('%Y-%m-%d')}&sortBy=publishedAt&apiKey={News_API_KEY}"
         news_data=requests.get(request_url).json()
     
     
