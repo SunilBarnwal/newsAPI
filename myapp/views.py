@@ -58,4 +58,39 @@ def search_menu(request):
     }
     return render(request, "index.html", news_data)
 
+def search(request, menu):
+    from_date = (
+        datetime.now() - timedelta(days=1)
+    ).strftime('%Y-%m-%d')
+
+    news_url = (
+        "https://newsapi.org/v2/everything"
+        f"?q={menu}&from={from_date}"
+        "&sortBy=publishedAt"
+        f"&apiKey={News_API_KEY}"
+    )
+
+    
+
+    news_data = []
+    
+
+    try:
+        news_response = requests.get(news_url, timeout=10)
+        news_response.raise_for_status()
+        news_json = news_response.json()
+
+        news_data = news_json.get("articles", [])
+
+    except requests.RequestException as e:
+        print("News API Error:", e)
+
+    
+
+    context = {
+        "news_data": news_data,
+    }
+
+    return render(request, "index.html", context)
+
     
